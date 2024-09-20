@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GeminiAPI\GeminiAPI.csproj" />
     <ProjectReference Include="..\OpenAITranslate.OpenAI\OpenAITranslate.OpenAI.csproj" />
   </ItemGroup>
 

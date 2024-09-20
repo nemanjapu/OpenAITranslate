@@ -1,3 +1,4 @@
+using GeminiAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpenAITranslate.OpenAI.Interfaces;
@@ -8,11 +9,13 @@ namespace OpenAITranslate.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IOpenAiServiceAsync openAiServiceAsync;
+        private readonly IGeminiApiServiceAsync geminiApiServiceAsync;
 
-        public IndexModel(ILogger<IndexModel> logger, IOpenAiServiceAsync openAiServiceAsync)
+        public IndexModel(ILogger<IndexModel> logger, IOpenAiServiceAsync openAiServiceAsync, IGeminiApiServiceAsync geminiApiServiceAsync)
         {
             _logger = logger;
             this.openAiServiceAsync = openAiServiceAsync;
+            this.geminiApiServiceAsync = geminiApiServiceAsync;
         }
 
         [BindProperty]
@@ -31,7 +34,7 @@ namespace OpenAITranslate.Pages
 
         public async Task OnPostAsync()
         {
-            Translation = await openAiServiceAsync.GetTranslation(Text, ToLanguage);
+            Translation = await geminiApiServiceAsync.GetTranslation(Text, ToLanguage);
         }
     }
 }
